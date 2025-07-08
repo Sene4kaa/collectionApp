@@ -5,4 +5,6 @@ public class Coordinates {
     private Long y; //Максимальное значение поля: 962, Поле не может быть null
 
     public Coordinates(Integer x, Long y) { this.x = x; this.y = y; }
+
+    public String getCoordinates() { return x + "," + y; }
 }

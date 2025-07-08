@@ -1,4 +1,4 @@
-package classes.errors;
+package interfaces;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,16 +7,17 @@ import java.util.Scanner;
 
 public interface Validate {
 
-    static void validateEmptyString(String field, Scanner in) {
+    static String validateEmptyString(String field, Scanner in) {
 
         while (field.isEmpty()) {
 
             System.out.println("Некорректный ввод. Поле не может быть пустым.\nПопробуйте еще раз: ");
             field = in.nextLine();
         }
+        return field;
     }
 
-    static void validateCapableString(String field, Scanner in, Integer count) {
+    static String validateCapableString(String field, Scanner in, Integer count) {
 
         while (field.length() > count || field.isEmpty()) {
 
@@ -25,9 +26,10 @@ public interface Validate {
             );
             field = in.nextLine();
         }
+        return field;
     }
 
-    static void validateCoordinate(String coordinate, Scanner in, Integer cap) {
+    static String validateCoordinate(String coordinate, Scanner in, Integer cap) {
 
         while (!coordinate.matches("-?\\d+") || Integer.parseInt(coordinate) > cap) {
 
@@ -37,9 +39,10 @@ public interface Validate {
             );
             coordinate = in.nextLine();
         }
+        return coordinate;
     }
 
-    static void validateNumberGreater0(String number, Scanner in) {
+    static String validateNumberGreater0(String number, Scanner in) {
 
         while (!number.isEmpty() && (!number.matches("-?\\d+") || Integer.parseInt(number) <= 0)) {
 
@@ -49,15 +52,17 @@ public interface Validate {
             );
             number = in.nextLine();
         }
+        return number;
     }
 
-    static void validateCoordinate(String coordinate, Scanner in, boolean isEmpty) {
+    static String validateCoordinate(String coordinate, Scanner in, boolean isEmpty) {
 
         while (isEmpty && coordinate.isEmpty() || !coordinate.matches("-?\\d+")) {
 
             System.out.println("Некорректный ввод. Не является целым числом. Попробуйте еще раз.\nВведите координату: ");
             coordinate = in.nextLine();
         }
+        return coordinate;
     }
 
     static String validateDate(String date, Scanner in) throws DateTimeParseException {

@@ -5,7 +5,9 @@ public class Location {
     private final int y;
     private final String name; //Длина строки не должна быть больше 929, Поле не может быть null
 
-    public Location(Integer x, int y, String name) {this.x = x; this.y = y; this.name = name; }
+    public Location(String name, Integer x, int y) { this.name = name; this.x = x; this.y = y; }
 
     public String getName() { return name; }
+
+    public String getLocation() { return name + "," + x + "," + y;}
 }

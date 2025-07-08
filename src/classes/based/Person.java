@@ -37,8 +37,42 @@ public class Person {
         this.location = location;
     }
 
-    public String getInfo() {
+    public Person(String name,
+                  Coordinates coordinates,
+                  java.util.Date creationDate,
+                  Long height,
+                  java.time.LocalDate birthday,
+                  Color hairColor,
+                  Country nationality,
+                  Location location
+    ) {
 
-        return "Имя: " + name + ", рост: " + height + "локация: " + this.location.getName();
+        this.id = nextId++;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.height = height;
+        this.birthday = birthday;
+        this.hairColor = hairColor;
+        this.nationality = nationality;
+        this.location = location;
+    }
+
+    public String getMainInfo() {
+
+        return "Имя: " + name + ", рост: " + height + "см, локация: " + this.location.getName();
+    }
+
+    public String getInfoForCSVFile() {
+        return String.format("%s,%s,%s,%d,%s,%s,%s,%s",
+                name,
+                coordinates.getCoordinates(),
+                creationDate,
+                height,
+                birthday,
+                hairColor,
+                nationality,
+                location.getLocation()
+                );
     }
 }

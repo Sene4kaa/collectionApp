@@ -1,10 +1,8 @@
-package classes.commands;
+package interfaces;
 
-import classes.errors.Validate;
+public interface GetHelpMessage {
 
-public class Command implements Validate {
-
-    private static final String HELP_MESSAGE =  """
+    String HELP_MESSAGE =  """
         help : вывести справку по доступным командам
         info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
         show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
@@ -23,5 +21,5 @@ public class Command implements Validate {
         print_unique_nationality : вывести уникальные значения поля nationality всех элементов в коллекции
         """;
 
-    public static String getHelpMessage() { return HELP_MESSAGE; }
+    static String message() { return HELP_MESSAGE; }
 }
