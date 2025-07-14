@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public interface AddElements {
 
-    static void fromKeyboard(ArrayDeque<Person> p, Scanner in) {
+    static void fromKeyboard(ArrayDeque<Person> p, Scanner in, boolean isMax) {
 
         System.out.println("Введите имя: ");
         String name = in.nextLine();
@@ -39,15 +39,18 @@ public interface AddElements {
         birthday = Validate.validateDate(birthday, in);
 
         LocalDate finalBirthday;
-        if (birthday.isEmpty()) { finalBirthday = null; }
-        else { finalBirthday = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd.MM.yyyy")); }
+        if (birthday.isEmpty()) {
+            finalBirthday = null;
+        } else {
+            finalBirthday = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        }
 
-        System.out.printf("Введите цвет волос. Доступные цвета: %s", Arrays.toString(Color.values()));
+        System.out.printf("Введите цвет волос. Доступные цвета: %s%n", Arrays.toString(Color.values()));
         String color = in.nextLine();
         color = Validate.validateEnum(color, in, Color.class, true);
         Color finalColor = Color.valueOf(color);
 
-        System.out.printf("Введите национальность. Доступные нации: %s", Arrays.toString(Country.values()));
+        System.out.printf("Введите национальность. Доступные нации: %s%n", Arrays.toString(Country.values()));
         String country = in.nextLine();
         country = Validate.validateEnum(country, in, Country.class, false);
         Country finalCountry = Country.valueOf(country);
@@ -64,6 +67,13 @@ public interface AddElements {
         String locationY = in.nextLine();
         locationY = Validate.validateCoordinate(locationY, in, true);
 
+        if (isMax) {
+            String check = Filter.heightGreaterThanDigit(p, Long.parseLong(height));
+            if (!check.isEmpty()) {
+                System.out.println("Рост этого человека не выше максимального в коллекции.");
+                return;
+            }
+        }
         p.add(new Person(
                 name,
                 new Coordinates(Integer.parseInt(x), Long.parseLong(y)),

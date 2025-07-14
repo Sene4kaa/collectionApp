@@ -75,4 +75,8 @@ public class Person {
                 location.getLocation()
                 );
     }
+
+    public Long getHeight() { return height; }
+
+    public Country getNationality() { return nationality; }
 }

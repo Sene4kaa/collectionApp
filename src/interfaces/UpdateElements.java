@@ -12,19 +12,16 @@ public interface UpdateElements {
 
     static void byID(ArrayDeque<Person> people, String id_str, Scanner in) {
 
-        if (!id_str.matches("-?\\d+")) { System.out.println("Некорректный ID."); return; }
+        if (!(Validate.validateID(people, id_str))) {return; }
 
         int id = Integer.parseInt(id_str);
-
-        if (id >= people.size() || id < 0) { System.out.println("Некорректный ID."); return; }
-
         ArrayDeque<Person> person = new ArrayDeque<>();
-        AddElements.fromKeyboard(person, in);
+        AddElements.fromKeyboard(person, in, false);
 
         List<Person> temp = new ArrayList<>(people);
         temp.set(id, person.getFirst());
         people.clear();
         people.addAll(temp);
-        System.out.printf("Элемент с ID %d обновлен.", id);
+        System.out.printf("Элемент с ID %d обновлен.%n", id);
     }
 }

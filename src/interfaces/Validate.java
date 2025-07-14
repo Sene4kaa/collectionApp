@@ -1,8 +1,11 @@
 package interfaces;
 
+import classes.based.Person;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayDeque;
 import java.util.Scanner;
 
 public interface Validate {
@@ -27,6 +30,16 @@ public interface Validate {
             field = in.nextLine();
         }
         return field;
+    }
+
+    static boolean validateID(ArrayDeque<Person> people, String number) {
+
+        if (!number.matches("-?\\d+")) { System.out.println("Некорректный ID."); return false; }
+
+        int id = Integer.parseInt(number);
+        if (id < 0 || id >= people.size()) { System.out.println("Некорректный ID."); return false; }
+
+        return true;
     }
 
     static String validateCoordinate(String coordinate, Scanner in, Integer cap) {
